@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globalcodingc.gcc.Service.FileReorg;
+import com.globalcodingc.gcc.Service.PortfilioSum;
 import com.globalcodingc.gcc.Service.ProfitMaximization;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class GccController {
 
     @Autowired
     FileReorg fileReorg;
-
+    @Autowired
+    PortfilioSum portfilioSum;
 
     @PostMapping(value = "/profit-maximization", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> profitMaximization(@RequestBody String json) throws JsonProcessingException {
@@ -65,6 +67,20 @@ public class GccController {
                 .split(" ,"))};
         List<Integer> answer = fileReorg.findpalindrome(clear);
 
+        Map<String, Object> ans = new HashMap<>();
+        ans.put("answer", answer);
+        return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
+    }
+
+    @PostMapping(value = "/portfolio-operations", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> portfolioOperations(@RequestBody String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map
+                = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+        });
+
+        String input = map.values().toString();
+        List<Integer> answer = portfilioSum.findMaxProfit(input);
         Map<String, Object> ans = new HashMap<>();
         ans.put("answer", answer);
         return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
