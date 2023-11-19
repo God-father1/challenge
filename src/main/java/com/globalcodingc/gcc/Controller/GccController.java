@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.globalcodingc.gcc.Service.EncryptingPP;
 import com.globalcodingc.gcc.Service.FileReorg;
+//import com.globalcodingc.gcc.Service.Mlmm;
 import com.globalcodingc.gcc.Service.PortfilioSum;
 import com.globalcodingc.gcc.Service.ProfitMaximization;
 import org.json.*;
@@ -34,6 +36,12 @@ public class GccController {
     FileReorg fileReorg;
     @Autowired
     PortfilioSum portfilioSum;
+
+//    @Autowired
+//    Mlmm mlmm;
+
+    @Autowired
+    EncryptingPP encryptingPP;
 
     @PostMapping(value = "/profit-maximization", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> profitMaximization(@RequestBody String json) throws JsonProcessingException {
@@ -86,4 +94,32 @@ public class GccController {
         return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
     }
 
+//    @PostMapping(value = "/mlmm-program", consumes = "application/json", produces = "application/json")
+//    public ResponseEntity<String> findWays(@RequestBody String json) throws JsonProcessingException {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, Object> map
+//                = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+//        });
+//
+//        String input = map.values().toString();
+//        List<Integer> answer = mlmm.findCombination(input);
+//        Map<String, Object> ans = new HashMap<>();
+//        ans.put("answer", answer);
+//        return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
+//    }
+
+
+    @PostMapping(value = "/data-encryption", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> encryptionPP(@RequestBody String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map
+                = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+        });
+
+        String input = map.values().toString();
+        List<String> answer = encryptingPP.findpalindrome(input);
+        Map<String, Object> ans = new HashMap<>();
+        ans.put("answer", answer);
+        return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
+    }
 }

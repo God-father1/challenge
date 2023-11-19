@@ -29,9 +29,7 @@ public class FileReorg {
         String[] input = payload[0].split(", ");
 
         for (int k = 0; k < input.length; k++) {
-
                 answer.add(longestPalindrome(input[k]));
-
         }
         for (int i = 0; i < answer.size(); i++) {
             System.out.println(answer.get(i));
