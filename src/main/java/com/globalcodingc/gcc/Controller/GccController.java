@@ -4,11 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.globalcodingc.gcc.Service.EncryptingPP;
-import com.globalcodingc.gcc.Service.FileReorg;
+import com.globalcodingc.gcc.Service.*;
 //import com.globalcodingc.gcc.Service.Mlmm;
-import com.globalcodingc.gcc.Service.PortfilioSum;
-import com.globalcodingc.gcc.Service.ProfitMaximization;
 import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +34,8 @@ public class GccController {
     @Autowired
     PortfilioSum portfilioSum;
 
-//    @Autowired
-//    Mlmm mlmm;
+    @Autowired
+    Mlmm mlmm;
 
     @Autowired
     EncryptingPP encryptingPP;
@@ -94,19 +91,19 @@ public class GccController {
         return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
     }
 
-//    @PostMapping(value = "/mlmm-program", consumes = "application/json", produces = "application/json")
-//    public ResponseEntity<String> findWays(@RequestBody String json) throws JsonProcessingException {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map<String, Object> map
-//                = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
-//        });
-//
-//        String input = map.values().toString();
-//        List<Integer> answer = mlmm.findCombination(input);
-//        Map<String, Object> ans = new HashMap<>();
-//        ans.put("answer", answer);
-//        return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
-//    }
+    @PostMapping(value = "/mlmm-program", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> findWays(@RequestBody String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map
+                = objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+        });
+
+        String input = map.values().toString();
+        List<Integer> answer = mlmm.findCombination(input);
+        Map<String, Object> ans = new HashMap<>();
+        ans.put("answer", answer);
+        return ResponseEntity.ok(objectMapper.writeValueAsString(ans));
+    }
 
 
     @PostMapping(value = "/data-encryption", consumes = "application/json", produces = "application/json")
