@@ -7,7 +7,7 @@ import java.util.*;
 public class Mlmm {
 
 
-    static int countSubarray(int arr[],
+     int countSubarray(int arr[],
                              int n, int k)
     {
         int count = 0;
@@ -34,7 +34,7 @@ public class Mlmm {
 
 
 
-    public static List<Integer> findCombination(String payload) {
+    public  List<Integer> findCombination(String payload) {
         Queue<Integer> queue = new LinkedList<>();
         List<Integer> answer = new ArrayList<>();
         String[] data = payload.replaceAll("\\[", "")
@@ -43,9 +43,9 @@ public class Mlmm {
                 .replaceAll(" ", ",")
                 .split(",");
 //        List<Integer> a=new ArrayList<>();
-        for (int i = 0; i < data.length; i++) {
-            System.out.println(data[i]);
-        }
+//        for (int i = 0; i < data.length; i++) {
+//            System.out.println(data[i]);
+//        }
 
         for (int i = 0; i < data.length; i++) {
             queue.add(Integer.valueOf(data[i]));
@@ -64,13 +64,16 @@ public class Mlmm {
             for(int i=0;i<m;i++){
                 a.add(k[i]);
             }
-            List<Integer> b= new ArrayList<>(new HashSet<>(a));
-            System.out.println(a.size() + " "+ b.size());
+
+            List<Integer> b= new ArrayList<>(new LinkedHashSet<>(a));
+//            System.out.println(a.size() + " "+ b.size());
             int[] c=new int[b.size()];
             for(int i=0;i<b.size();i++){
                 c[i]=b.get(i);
+                System.out.print(c[i]+" ");
             }
-            answer.add(countSubarray(c,c.length,maxSum));
+            System.out.println(" ");
+            answer.add(countSubarray(k,m,maxSum));
         }
 
         return answer;
